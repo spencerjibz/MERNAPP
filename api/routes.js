@@ -14,7 +14,7 @@ const {log} = console
 // multr setup 
 const storage = multer.diskStorage({
   destination:function(req,file,cb){
-    cb(null,'./client/src/assets/uploads/')
+    cb(null,path.resolve('./client/build/images/'))
   },filename:function(req,file,cb){
     cb(null,Date.now()+file.originalname)
   }
@@ -410,7 +410,7 @@ router.post('/photo',authCheck,(req,res)=> {
         res.json({error:`user's profile picture already exists`})
         }
    else {
-    photopath = req.file.path.replace(/client\\+src\\+assets\\uploads\\/g, '')
+    photopath = req.file.path.replace(/client\\+build\\+images\\/g, '')
 
   Photo.Savephoto(userData.user.username,photopath, (err, img) => {
       if (err) {
