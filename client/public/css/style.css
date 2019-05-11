@@ -1,0 +1,64 @@
+.hero {
+    background-image: url(../images/salzgitter-2739271_1920.jpg);
+    background-repeat: no-repeat;
+    ;
+    background-size: cover;
+    background-position: center center;
+    padding: 40px 0;
+    min-height: 600px;
+    position: relative;
+    opacity: 0.2;
+    filter: alpha(opacity=50);
+    line-height: 0.5;
+
+
+}
+
+.hero:hover {
+
+    opacity: 1.5;
+    filter: alpha(opacity=100);
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    width: 100%;
+
+
+
+
+}
+
+.hero-content h2 {
+    color: #fff;
+    font-size: 80px;
+
+}
+
+.hero-content p {
+    color: #fff;
+    font-size: 40px;
+    margin-bottom: 30px;
+
+
+
+}
+
+hero-content .btn {
+    border-radius: 2px;
+    padding: 20px 30px;
+
+
+}
+#contact-form {
+    caret-color: auto;
+    text-align: center;
+
+    font-size: 1.7em;
+    font-weight: bold;
+    font-family: "Helvetical";
+
+
+}

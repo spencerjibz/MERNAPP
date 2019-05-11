@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: verdana;
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+
+header .navbar {
+  margin: 0px;
+  border-radius: 0px;
+  color: #888;
+}
+
+nav a {
+  color: grey;
+}
+
+footer {
+  padding: 30px 0;
+  font-size: 14px;
+  color: #888;
+  background: #222;
+  text-align: center;
+}
+
+main {
+  min-height: 500px;
+  padding: 50px 0;
+}
+.regist {
+  color: lightblue;
+  text-align: center;
+  font: Bold 24px verdana;
+
+}
+#mist {
+  padding-top: 200px;
+  padding-bottom: 200px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+#container {
+  margin: 20px;
+
+
+  background-color: cream;
+
+}
+
+.form-group {
+  list-style-type: none;
+
+}
+
+#results {
+  float: right;
+  padding: 50px;
+
+}
+
+#profile-photo {
+  background-color: #14141414;
+  float: left;
+
+
+}
+
+#upload {
+
+  padding: 1em;
+}
+#forgot:hover{
+text-decoration: underline;
+}
