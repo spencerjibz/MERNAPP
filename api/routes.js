@@ -14,7 +14,7 @@ const {log} = console
 // multr setup 
 const storage = multer.diskStorage({
   destination:function(req,file,cb){
-    cb(null,path.resolve('./client/build/images/'))
+    cb(null,'./client/build/images/')
   },filename:function(req,file,cb){
     cb(null,Date.now()+file.originalname)
   }
