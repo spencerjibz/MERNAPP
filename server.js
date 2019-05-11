@@ -26,7 +26,7 @@ app.disable('x-powered-by')
 // import router
 let router = require('./api/routes')
 // Public folder for assets
-app.use(express.static(__dirname='./client/src/assets/uploads/'))
+
 
 
 // setup the router to external file
