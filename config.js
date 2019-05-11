@@ -1,7 +1,8 @@
-module.exports = {
+
+let config= {
     ENV:process.env.NODE_ENV||'development',
-    PORT:process.env.PORT||5000,
-    URL:process.env.BASE_URL||'http://localhost:5000',
+    PORT:process.env.PORT||7000,
+    URL:process.env.BASE_URL||`http://localhost:${7000}`,
     MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/myapi',
     TOKEN_SEC:process.env.TOKEN_SEC||'secretKey',
     NODE_MAILER_EA: process.env.NODE_MAILER_EA ,
@@ -14,3 +15,4 @@ module.exports = {
     
     */
 }
+module.exports = config

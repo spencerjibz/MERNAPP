@@ -101,7 +101,7 @@ v.data.hasOwnProperty('error')?this.setState({isError:true,Errmessage:v.data.err
 <div className='jumbotron' id='grid'>
 
    { this.state.Nophoto === false ? this.state.photodata.map((result) => < Photo key = { result._id}
-   data = {`http://localhost:5000/${result.photoPath}` }
+   data = {`http://localhost:7000/${result.photoPath}` }
          />):null}
 
    <br/>
