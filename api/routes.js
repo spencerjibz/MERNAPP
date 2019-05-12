@@ -8,17 +8,35 @@ let config = require('../config')
 let authCheck = require('./api-auth.js')
 let nodemailer = require('nodemailer')
 let getUnique = require('../lib/getUniqueArray')
+let crypto = require('crypto')
+const Grid = require('gridfs-stream')
+let GridFsStorage = require('multer-gridfs-storage')
 const expressValidator = require('express-validator')
+let mongoose = require('mongoose')
 const { check, validationResult } = require('express-validator/check');
 const {log} = console
-// multr setup 
-const storage = multer.diskStorage({
-  destination:function(req,file,cb){
-    cb(null,'./client/build/images/')
-  },filename:function(req,file,cb){
-    cb(null,Date.now()+file.originalname)
-  }
-})
+
+
+// create a gridfs storage engine for multer
+const storage = new GridFsStorage({
+    url: config.MONGODB_URI,
+    file: (req, file) => {
+        return new Promise((resolve, reject) => {
+            crypto.randomBytes(16, (err, buf) => {
+                if (err) {
+                    return reject(err);
+                }
+                const filename = buf.toString('hex') + path.extname(file.originalname);
+                const fileInfo = {
+                    filename: filename,
+                    bucketName: 'uploads'
+                };
+                resolve(fileInfo);
+            });
+        });
+    }
+});
+
 const fileFilter = (req,file,cb)=>{
   const {mimetype} = file
   
@@ -211,7 +229,7 @@ router.post('/deleteone',authCheck,(req,res)=>{
        if (isdone) {
            Photo.Deletephoto(req.body.email,(err,done)=>{
                err? log(err):
-               log(`Photo at ${done.photoPath} has been deleted successfully`) 
+               log(` ${done.photoName} has been deleted successfully`) 
            })
           res.json({
               message: 'account deleted successfully'
@@ -402,7 +420,7 @@ router.post('/photo',authCheck,(req,res)=> {
     Upload(req,res,(err)=>{
       
     err||req.file===undefined||req.file.path===null? res.json({error:err!==undefined&&err!==null?err.message:'no files submitted'}):
-    Photo.Findphoto(userData.user.username,(err,isfound)=>{
+    Photo.findOne({username:userData.user.username},(err,isfound)=>{
         if(err){
             log(err)
         }
@@ -410,9 +428,9 @@ router.post('/photo',authCheck,(req,res)=> {
         res.json({error:`user's profile picture already exists`})
         }
    else {
-    photopath = req.file.path.replace(/client\\+build\\+images\\/g, '')
+   let  photoName = req.file.filename
 
-  Photo.Savephoto(userData.user.username,photopath, (err, img) => {
+  Photo.Savephoto(userData.user.username,photoName,(err, img) => {
       if (err) {
         log(err)
       } else {
@@ -440,12 +458,34 @@ router.post('/photo',authCheck,(req,res)=> {
 })
 // fetch a user's photo 
 router.post('/profile-photo',authCheck,(req,res)=>{
+    let readable
  let test = Object.keys(req.body).length > 0 && req.body !== null && req.body.hasOwnProperty('email')
-  
-  Photo.Findphoto(req.body.email,(err,photodata)=>{
+  Photo.findOne({username:req.body.email},(err,isfound)=>{
+    err||isfound===null? res.json({code:404,error:err!==undefined&&err!==null?err.message:'no photoinfo found'}):   
+     Photo.Findphoto(isfound.photoName,(err,photodata)=>{
       err||photodata===null? res.json({code:404,error:err!==undefined&&err!==null?err.message:'no photoinfo found'}):
-      res.json({photodata})
+
+          readable = gfs.createReadStream(photodata.filename)
+          res.set('Content-Type',photodata.contentType)
+          readable.pipe(res)
   })
+
+  })
+ 
+})
+// get photo
+router.get('/profile-photo/:username',(req,res)=>{
+    let readable
+Photo.findOne({username:req.params.username},(err,isfound)=>{
+    err||isfound===null? res.end('not Found'):   
+     Photo.Findphoto(isfound.photoName,(err,photodata)=>{
+      err||photodata===null? res.end('file not found'):
+
+          readable = gfs.createReadStream(photodata.filename)
+          res.set('Content-Type',photodata.contentType)
+          readable.pipe(res)
+  })
+})
 })
 // update user'photo
 router.post('/updatephoto',authCheck,(req,res)=>{
@@ -458,13 +498,13 @@ err? res.json({
   }):
      Upload(req,res,(err)=>{
 
- if( err || req.file === undefined ||req.file.path===undefined||req.file.path===null) { res.json({
+ if( err || req.file === undefined ) { res.json({
       error: err !== undefined && err !== null ? err.message : 'no files submitted'
   }) }
 
 else {
-    let photopath = req.file.path
-    Photo.Updatephoto(userdata.user.username, photopath, (err, photodata) => {
+    let photoName = req.file.filename
+    Photo.Updatephoto(userdata.user.username, photoName, (err, photodata) => {
 
         if (err || photodata === null) {
             res.json({
