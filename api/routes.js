@@ -17,6 +17,16 @@ const { check, validationResult } = require('express-validator/check');
 const {log} = console
 
 
+let gfs;
+
+let conn = mongoose.createConnection(config.MONGODB_URI);
+conn.once('open', function () {
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('uploads')
+
+    // all set!
+})
+
 // create a gridfs storage engine for multer
 const storage = new GridFsStorage({
     url: config.MONGODB_URI,
