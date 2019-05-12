@@ -2,7 +2,7 @@
   "name": "mernclient",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:7000",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
@@ -19,6 +19,7 @@
     "react-scripts": "^3.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "serve": "^11.0.0",
     "shortid": "^2.2.14"
   },
   "scripts": {
@@ -26,6 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+    
   },
   "eslintConfig": {
     "extends": "react-app"

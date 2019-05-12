@@ -42,22 +42,15 @@ app.use(function(err,req,res,next){
 }
 next()
 })
-// Globar variables
-app.use(function(req,res,next){
-    res.locals.user = req.user||null
+// Serve static assets if in production
+if (process.env.NODE_ENV==='production'){
+// set static folder
+app.use(express.static('client/build'))
 
-    next()
-})
-// attach the user property to the app
-app.use(function(req,res,next){
-    req.user = ''
-    log(req.user)
-    next()
-})
-
+}
 // init app
 app.listen(port,()=>{
-    log(`app started at ${config.URL}`)
+    log(`app started at  port ${config.PORT}`)
     db.set({UseCreateIndexes:true})
    db.connect(config.MONGODB_URI,{useNewUrlParser:true}).then(()=>{
    let User = require('./lib/User-model')
