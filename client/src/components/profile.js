@@ -34,13 +34,14 @@ class App extends Component{
     axios.post('/api/photo',data,{headers:{'content-type':'multipart/form-data; boundary=----WebKitFormBoundaryAtnbRG4IWrG5y81e'}})
     .then(v=>{
  v.data.hasOwnProperty('error')?this.setState({isError:true,Errmessage:v.data.error}):
- this.setState({Nophoto:false,photodata:[v.data.img]})
+ this.setState({Nophoto:false,photodata:[`/api/profile-photo/${this.props.user.username}`]})
 }):
 
 axios.post('/api/updatephoto',data,{headers:{'content-type':'multipart/form-data; boundary=----WebKitFormBoundaryAtnbRG4IWrG5y81e'}})
 .then(v=>{
 v.data.hasOwnProperty('error')?this.setState({isError:true,Errmessage:v.data.error}):
  this.fetchPhoto()
+
  
 
 
@@ -67,7 +68,8 @@ v.data.hasOwnProperty('error')?this.setState({isError:true,Errmessage:v.data.err
     axios.post('/api/profile-photo', { email: this.props.user.username }).then(
       v => {
         
-        v.data.hasOwnProperty('error') ? this.setState({ Nophoto: true }) : this.setState({ Nophoto: false, isError:false,photodata: [v.data.photodata] })
+        v.data.hasOwnProperty('error') ? this.setState({ Nophoto: true }) : 
+        this.setState({ Nophoto: false, isError:false,photodata: [`/api/profile-photo/${this.props.user.username}`] })
 
   
            $('#changeinfo').hide()
@@ -93,6 +95,7 @@ v.data.hasOwnProperty('error')?this.setState({isError:true,Errmessage:v.data.err
 
 
   }
+  
   render(){
     return(<div className='container' id='container'>
 
@@ -100,8 +103,8 @@ v.data.hasOwnProperty('error')?this.setState({isError:true,Errmessage:v.data.err
  {this.state.isError?( <ErrorMsg msg={this.state.Errmessage}/>):null}
 <div className='jumbotron' id='grid'>
 
-   { this.state.Nophoto === false ? this.state.photodata.map((result) => < Photo key = { result._id}
-   data = {`http://localhost:5000/${result.photoPath}` }
+   { this.state.Nophoto === false ? this.state.photodata.map((result,i) => < Photo key = {i}
+   data = {result}
          />):null}
 
    <br/>
