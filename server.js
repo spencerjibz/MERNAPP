@@ -26,7 +26,7 @@ app.disable('x-powered-by')
 // import router
 let router = require('./api/routes')
 // Public folder for assets
-app.use(express.static(__dirname='./client/src/assets/uploads/'))
+
 
 
 // setup the router to external file
@@ -47,6 +47,9 @@ if (process.env.NODE_ENV==='production'){
 // set static folder
 app.use(express.static('client/build'))
 
+app.use('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+})
 }
 // init app
 app.listen(port,()=>{
