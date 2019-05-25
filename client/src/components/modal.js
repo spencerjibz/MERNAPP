@@ -19,6 +19,7 @@ export class modal extends Component {
       error_msg:'',
       Redirect:false,
       DeleteAccount:false,
+      SucessMesage:''
   }
   this.DeleteUser = this.DeleteUser.bind(this)
     }
@@ -56,6 +57,10 @@ this.setState({
   this.DeleteUser(username,()=>{
     if(this.state.DeleteAccount){
  this.props.signout()
+   this.props.addFlashMessage({
+     type: 'success',
+     text: this.state.SucessMesage,
+   })
  this.context.router.history.push('/')
     }
    
@@ -77,12 +82,10 @@ cb(null)
          this.setState({
            show: false,
            Redirect: true,
-           DeleteAccount: true
+           DeleteAccount: true,
+           SucessMesage:data.message
          })
-         this.props.addFlashMessage({
-           type: 'success',
-           text: data.message
-         })
+       
 
          cb()
 
