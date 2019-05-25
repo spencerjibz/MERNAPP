@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import {Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {login,fetchUser} from '../actions/loginAction'
+import {login,fetchUser,ClearMessage} from '../actions/loginAction'
 import addFlashMessage from '../actions/flashMessages'
 import SetAuthToken from '../utils/SetAuthtoken'
 import getUnique from '../utils/deleteDuplicates'
@@ -52,6 +52,7 @@ class Main extends Component {
      const {token} = info.data
      localStorage.setItem('jwttoken',token)
      SetAuthToken(token)
+     this.props.ClearMessage()
     this.props.fetchUser(()=> this.setState({redirectToReferrer:true}))
   
     
@@ -131,7 +132,8 @@ Main.propTypes={
   fetchUser:PropTypes.func.isRequired,
   auth:PropTypes.object.isRequired,
   addFlashMessage:PropTypes.func.isRequired,
-  message:PropTypes.array.isRequired
+  message:PropTypes.array.isRequired,
+  ClearMessage:PropTypes.func.isRequired,
 }
 function mapStatetoProps(state){
   return {
@@ -139,4 +141,4 @@ function mapStatetoProps(state){
     message:getUnique(state.flashMessages,'text')
   }
 }
-export default connect(mapStatetoProps,{login,fetchUser,addFlashMessage})(Main)
+export default connect(mapStatetoProps,{login,fetchUser,addFlashMessage,ClearMessage})(Main)

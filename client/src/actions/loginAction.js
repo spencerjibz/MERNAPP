@@ -45,6 +45,13 @@ export function signout(cb){
         setAuthtoken(false)
       
        Auther.signout(() => dispatch(setCurrentUser()))
-       
+        dispatch(ClearMessage())
     }
+}
+export function ClearMessage(){
+
+ return dispatch => {
+     dispatch(addFlashMessage({}))
+ }
+
 }
