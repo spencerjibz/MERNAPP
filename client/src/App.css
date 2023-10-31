@@ -1,33 +1,30 @@
-
-.container{
-  margin:20px;
-  padding:100px;
+.container {
+  margin: 20px;
+  padding: 100px;
   border: none;
   background-color: cream;
-
 }
-ul{
-  list-style-type:none;
-  border:none;
+ul {
+  list-style-type: none;
+  border: none;
   text-align: center;
 }
-#results{
-  float:right;
-  padding:50px;
-  border:none;
+#results {
+  float: right;
+  padding: 50px;
+  border: none;
 }
-#profile-photo{
-  background-color:#14141414;
-  float:left;
-  
-  border:none;
+#profile-photo {
+  background-color: #14141414;
+  float: left;
+
+  border: none;
 }
-#upload{
-  border:none;
-  padding:1em;
+#upload {
+  border: none;
+  padding: 1em;
 }
 
-
-#changebut{
- float:right;
+#changebut {
+  float: right;
 }

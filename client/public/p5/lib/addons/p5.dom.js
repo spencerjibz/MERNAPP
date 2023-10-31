@@ -25,14 +25,14 @@
  * @main
  */
 
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd)
-    define('p5.dom', ['p5'], function(p5) {
+(function (root, factory) {
+  if (typeof define === "function" && define.amd)
+    define("p5.dom", ["p5"], function (p5) {
       factory(p5);
     });
-  else if (typeof exports === 'object') factory(require('../p5'));
-  else factory(root['p5']);
-})(this, function(p5) {
+  else if (typeof exports === "object") factory(require("../p5"));
+  else factory(root["p5"]);
+})(this, function (p5) {
   // =============================================================================
   //                         p5 additions
   // =============================================================================
@@ -74,11 +74,11 @@
    * </code></div>
    *
    */
-  p5.prototype.select = function(e, p) {
-    p5._validateParameters('select', arguments);
+  p5.prototype.select = function (e, p) {
+    p5._validateParameters("select", arguments);
     var res = null;
     var container = getContainer(p);
-    if (e[0] === '.') {
+    if (e[0] === ".") {
       e = e.slice(1);
       res = container.getElementsByClassName(e);
       if (res.length) {
@@ -86,7 +86,7 @@
       } else {
         res = null;
       }
-    } else if (e[0] === '#') {
+    } else if (e[0] === "#") {
       e = e.slice(1);
       res = container.getElementById(e);
     } else {
@@ -145,12 +145,12 @@
    * </code></div>
    *
    */
-  p5.prototype.selectAll = function(e, p) {
-    p5._validateParameters('selectAll', arguments);
+  p5.prototype.selectAll = function (e, p) {
+    p5._validateParameters("selectAll", arguments);
     var arr = [];
     var res;
     var container = getContainer(p);
-    if (e[0] === '.') {
+    if (e[0] === ".") {
       e = e.slice(1);
       res = container.getElementsByClassName(e);
     } else {
@@ -170,7 +170,7 @@
    */
   function getContainer(p) {
     var container = document;
-    if (typeof p === 'string' && p[0] === '#') {
+    if (typeof p === "string" && p[0] === "#") {
       p = p.slice(1);
       container = document.getElementById(p) || document;
     } else if (p instanceof p5.Element) {
@@ -184,11 +184,11 @@
   /**
    * Helper function for getElement and getElements.
    */
-  p5.prototype._wrapElement = function(elt) {
+  p5.prototype._wrapElement = function (elt) {
     var children = Array.prototype.slice.call(elt.children);
-    if (elt.tagName === 'INPUT' && elt.type === 'checkbox') {
+    if (elt.tagName === "INPUT" && elt.type === "checkbox") {
       var converted = new p5.Element(elt, this);
-      converted.checked = function() {
+      converted.checked = function () {
         if (arguments.length === 0) {
           return this.elt.checked;
         } else if (arguments[0]) {
@@ -199,14 +199,14 @@
         return this;
       };
       return converted;
-    } else if (elt.tagName === 'VIDEO' || elt.tagName === 'AUDIO') {
+    } else if (elt.tagName === "VIDEO" || elt.tagName === "AUDIO") {
       return new p5.MediaElement(elt, this);
-    } else if (elt.tagName === 'SELECT') {
+    } else if (elt.tagName === "SELECT") {
       return this.createSelect(new p5.Element(elt, this));
     } else if (
       children.length > 0 &&
-      children.every(function(c) {
-        return c.tagName === 'INPUT' || c.tagName === 'LABEL';
+      children.every(function (c) {
+        return c.tagName === "INPUT" || c.tagName === "LABEL";
       })
     ) {
       return this.createRadio(new p5.Element(elt, this));
@@ -233,8 +233,8 @@
    * </code></div>
    *
    */
-  p5.prototype.removeElements = function(e) {
-    p5._validateParameters('removeElements', arguments);
+  p5.prototype.removeElements = function (e) {
+    p5._validateParameters("removeElements", arguments);
     for (var i = 0; i < this._elements.length; i++) {
       if (!(this._elements[i].elt instanceof HTMLCanvasElement)) {
         this._elements[i].remove();
@@ -305,8 +305,8 @@
    * dropdown: pear, kiwi, grape. When selected text "its a" + selection shown.
    *
    */
-  p5.Element.prototype.changed = function(fxn) {
-    p5.Element._adjustListener('change', fxn, this);
+  p5.Element.prototype.changed = function (fxn) {
+    p5.Element._adjustListener("change", fxn, this);
     return this;
   };
 
@@ -340,8 +340,8 @@
    * no display.
    *
    */
-  p5.Element.prototype.input = function(fxn) {
-    p5.Element._adjustListener('input', fxn, this);
+  p5.Element.prototype.input = function (fxn) {
+    p5.Element._adjustListener("input", fxn, this);
     return this;
   };
 
@@ -400,12 +400,12 @@
    * createSpan('this is some text');
    * </code></div>
    */
-  var tags = ['div', 'p', 'span'];
-  tags.forEach(function(tag) {
-    var method = 'create' + tag.charAt(0).toUpperCase() + tag.slice(1);
-    p5.prototype[method] = function(html) {
+  var tags = ["div", "p", "span"];
+  tags.forEach(function (tag) {
+    var method = "create" + tag.charAt(0).toUpperCase() + tag.slice(1);
+    p5.prototype[method] = function (html) {
       var elt = document.createElement(tag);
-      elt.innerHTML = typeof html === 'undefined' ? '' : html;
+      elt.innerHTML = typeof html === "undefined" ? "" : html;
       return addElement(elt, this);
     };
   });
@@ -432,27 +432,27 @@
    * @param  {Function} successCallback
    * @return {Object|p5.Element}
    */
-  p5.prototype.createImg = function() {
-    p5._validateParameters('createImg', arguments);
-    var elt = document.createElement('img');
+  p5.prototype.createImg = function () {
+    p5._validateParameters("createImg", arguments);
+    var elt = document.createElement("img");
     var args = arguments;
     var self;
-    var setAttrs = function() {
+    var setAttrs = function () {
       self.width = elt.offsetWidth || elt.width;
       self.height = elt.offsetHeight || elt.height;
-      if (args.length > 1 && typeof args[1] === 'function') {
+      if (args.length > 1 && typeof args[1] === "function") {
         self.fn = args[1];
         self.fn();
-      } else if (args.length > 1 && typeof args[2] === 'function') {
+      } else if (args.length > 1 && typeof args[2] === "function") {
         self.fn = args[2];
         self.fn();
       }
     };
     elt.src = args[0];
-    if (args.length > 1 && typeof args[1] === 'string') {
+    if (args.length > 1 && typeof args[1] === "string") {
       elt.alt = args[1];
     }
-    elt.onload = function() {
+    elt.onload = function () {
       setAttrs();
     };
     self = addElement(elt, this);
@@ -475,9 +475,9 @@
    * createA('http://p5js.org/', 'this is a link');
    * </code></div>
    */
-  p5.prototype.createA = function(href, html, target) {
-    p5._validateParameters('createA', arguments);
-    var elt = document.createElement('a');
+  p5.prototype.createA = function (href, html, target) {
+    p5._validateParameters("createA", arguments);
+    var elt = document.createElement("a");
     elt.href = href;
     elt.innerHTML = html;
     if (target) elt.target = target;
@@ -528,10 +528,10 @@
    * }
    * </code></div>
    */
-  p5.prototype.createSlider = function(min, max, value, step) {
-    p5._validateParameters('createSlider', arguments);
-    var elt = document.createElement('input');
-    elt.type = 'range';
+  p5.prototype.createSlider = function (min, max, value, step) {
+    p5._validateParameters("createSlider", arguments);
+    var elt = document.createElement("input");
+    elt.type = "range";
     elt.min = min;
     elt.max = max;
     if (step === 0) {
@@ -539,7 +539,7 @@
     } else if (step) {
       elt.step = step;
     }
-    if (typeof value === 'number') elt.value = value;
+    if (typeof value === "number") elt.value = value;
     return addElement(elt, this);
   };
 
@@ -571,9 +571,9 @@
    * }
    * </code></div>
    */
-  p5.prototype.createButton = function(label, value) {
-    p5._validateParameters('createButton', arguments);
-    var elt = document.createElement('button');
+  p5.prototype.createButton = function (label, value) {
+    p5._validateParameters("createButton", arguments);
+    var elt = document.createElement("button");
     elt.innerHTML = label;
     if (value) elt.value = value;
     return addElement(elt, this);
@@ -605,16 +605,16 @@
    * }
    * </code></div>
    */
-  p5.prototype.createCheckbox = function() {
-    p5._validateParameters('createCheckbox', arguments);
-    var elt = document.createElement('div');
-    var checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
+  p5.prototype.createCheckbox = function () {
+    p5._validateParameters("createCheckbox", arguments);
+    var elt = document.createElement("div");
+    var checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
     elt.appendChild(checkbox);
     //checkbox must be wrapped in p5.Element before label so that label appears after
     var self = addElement(elt, this);
-    self.checked = function() {
-      var cb = self.elt.getElementsByTagName('input')[0];
+    self.checked = function () {
+      var cb = self.elt.getElementsByTagName("input")[0];
       if (cb) {
         if (arguments.length === 0) {
           return cb.checked;
@@ -626,16 +626,14 @@
       }
       return self;
     };
-    this.value = function(val) {
+    this.value = function (val) {
       self.value = val;
       return this;
     };
     if (arguments[0]) {
-      var ran = Math.random()
-        .toString(36)
-        .slice(2);
-      var label = document.createElement('label');
-      checkbox.setAttribute('id', ran);
+      var ran = Math.random().toString(36).slice(2);
+      var label = document.createElement("label");
+      checkbox.setAttribute("id", ran);
       label.htmlFor = ran;
       self.value(arguments[0]);
       label.appendChild(document.createTextNode(arguments[0]));
@@ -681,21 +679,21 @@
    * @return {p5.Element}
    */
 
-  p5.prototype.createSelect = function() {
-    p5._validateParameters('createSelect', arguments);
+  p5.prototype.createSelect = function () {
+    p5._validateParameters("createSelect", arguments);
     var elt, self;
     var arg = arguments[0];
-    if (typeof arg === 'object' && arg.elt.nodeName === 'SELECT') {
+    if (typeof arg === "object" && arg.elt.nodeName === "SELECT") {
       self = arg;
       elt = this.elt = arg.elt;
     } else {
-      elt = document.createElement('select');
-      if (arg && typeof arg === 'boolean') {
-        elt.setAttribute('multiple', 'true');
+      elt = document.createElement("select");
+      if (arg && typeof arg === "boolean") {
+        elt.setAttribute("multiple", "true");
       }
       self = addElement(elt, this);
     }
-    self.option = function(name, value) {
+    self.option = function (name, value) {
       var index;
       //see if there is already an option with this name
       for (var i = 0; i < this.elt.length; i++) {
@@ -720,14 +718,14 @@
         }
       } else {
         //if it doesn't exist make it
-        var opt = document.createElement('option');
+        var opt = document.createElement("option");
         opt.innerHTML = name;
         if (arguments.length > 1) opt.value = value;
         else opt.value = name;
         elt.appendChild(opt);
       }
     };
-    self.selected = function(value) {
+    self.selected = function (value) {
       var arr = [],
         i;
       if (arguments.length > 0) {
@@ -738,7 +736,7 @@
         }
         return this;
       } else {
-        if (this.elt.getAttribute('multiple')) {
+        if (this.elt.getAttribute("multiple")) {
           for (i = 0; i < this.elt.selectedOptions.length; i++) {
             arr.push(this.elt.selectedOptions[i].value);
           }
@@ -800,10 +798,10 @@
    * }
    * </code></div>
    */
-  p5.prototype.createRadio = function(existing_radios) {
-    p5._validateParameters('createRadio', arguments);
+  p5.prototype.createRadio = function (existing_radios) {
+    p5._validateParameters("createRadio", arguments);
     // do some prep by counting number of radios on page
-    var radios = document.querySelectorAll('input[type=radio]');
+    var radios = document.querySelectorAll("input[type=radio]");
     var count = 0;
     if (radios.length > 1) {
       var length = radios.length;
@@ -822,42 +820,42 @@
     }
     // see if we got an existing set of radios from callee
     var elt, self;
-    if (typeof existing_radios === 'object') {
+    if (typeof existing_radios === "object") {
       // use existing elements
       self = existing_radios;
       elt = this.elt = existing_radios.elt;
     } else {
       // create a set of radio buttons
-      elt = document.createElement('div');
+      elt = document.createElement("div");
       self = addElement(elt, this);
     }
     // setup member functions
-    self._getInputChildrenArray = function() {
-      return Array.prototype.slice.call(this.elt.children).filter(function(c) {
-        return c.tagName === 'INPUT';
+    self._getInputChildrenArray = function () {
+      return Array.prototype.slice.call(this.elt.children).filter(function (c) {
+        return c.tagName === "INPUT";
       });
     };
 
     var times = -1;
-    self.option = function(name, value) {
-      var opt = document.createElement('input');
-      opt.type = 'radio';
+    self.option = function (name, value) {
+      var opt = document.createElement("input");
+      opt.type = "radio";
       opt.innerHTML = name;
       if (value) opt.value = value;
       else opt.value = name;
-      opt.setAttribute('name', 'defaultradio' + count);
+      opt.setAttribute("name", "defaultradio" + count);
       elt.appendChild(opt);
       if (name) {
         times++;
-        var label = document.createElement('label');
-        opt.setAttribute('id', 'defaultradio' + count + '-' + times);
-        label.htmlFor = 'defaultradio' + count + '-' + times;
+        var label = document.createElement("label");
+        opt.setAttribute("id", "defaultradio" + count + "-" + times);
+        label.htmlFor = "defaultradio" + count + "-" + times;
         label.appendChild(document.createTextNode(name));
         elt.appendChild(label);
       }
       return opt;
     };
-    self.selected = function(value) {
+    self.selected = function (value) {
       var i;
       var inputChildren = self._getInputChildrenArray();
       if (value) {
@@ -871,7 +869,7 @@
         }
       }
     };
-    self.value = function(value) {
+    self.value = function (value) {
       var i;
       var inputChildren = self._getInputChildrenArray();
       if (value) {
@@ -883,7 +881,7 @@
         for (i = 0; i < inputChildren.length; i++) {
           if (inputChildren[i].checked === true) return inputChildren[i].value;
         }
-        return '';
+        return "";
       }
     };
     return self;
@@ -929,29 +927,29 @@
    * </code>
    * </div>
    */
-  p5.prototype.createColorPicker = function(value) {
-    p5._validateParameters('createColorPicker', arguments);
-    var elt = document.createElement('input');
+  p5.prototype.createColorPicker = function (value) {
+    p5._validateParameters("createColorPicker", arguments);
+    var elt = document.createElement("input");
     var self;
-    elt.type = 'color';
+    elt.type = "color";
     if (value) {
       if (value instanceof p5.Color) {
-        elt.value = value.toString('#rrggbb');
+        elt.value = value.toString("#rrggbb");
       } else {
-        p5.prototype._colorMode = 'rgb';
+        p5.prototype._colorMode = "rgb";
         p5.prototype._colorMaxes = {
           rgb: [255, 255, 255, 255],
           hsb: [360, 100, 100, 1],
-          hsl: [360, 100, 100, 1]
+          hsl: [360, 100, 100, 1],
         };
-        elt.value = p5.prototype.color(value).toString('#rrggbb');
+        elt.value = p5.prototype.color(value).toString("#rrggbb");
       }
     } else {
-      elt.value = '#000000';
+      elt.value = "#000000";
     }
     self = addElement(elt, this);
     // Method to return a p5.Color object for the given color.
-    self.color = function() {
+    self.color = function () {
       if (value.mode) {
         p5.prototype._colorMode = value.mode;
       }
@@ -985,10 +983,10 @@
    * }
    * </code></div>
    */
-  p5.prototype.createInput = function(value, type) {
-    p5._validateParameters('createInput', arguments);
-    var elt = document.createElement('input');
-    elt.type = type ? type : 'text';
+  p5.prototype.createInput = function (value, type) {
+    p5._validateParameters("createInput", arguments);
+    var elt = document.createElement("input");
+    elt.type = type ? type : "text";
     if (value) elt.value = value;
     return addElement(elt, this);
   };
@@ -1026,8 +1024,8 @@
    * }
    * </code></div>
    */
-  p5.prototype.createFileInput = function(callback, multiple) {
-    p5._validateParameters('createFileInput', arguments);
+  p5.prototype.createFileInput = function (callback, multiple) {
+    p5._validateParameters("createFileInput", arguments);
     // Function to handle when a file is selected
     // We're simplifying life and assuming that we always
     // want to load every selected file
@@ -1043,22 +1041,22 @@
     // Is the file stuff supported?
     if (window.File && window.FileReader && window.FileList && window.Blob) {
       // Yup, we're ok and make an input file selector
-      var elt = document.createElement('input');
-      elt.type = 'file';
+      var elt = document.createElement("input");
+      elt.type = "file";
 
       // If we get a second argument that evaluates to true
       // then we are looking for multiple files
       if (multiple) {
         // Anything gets the job done
-        elt.multiple = 'multiple';
+        elt.multiple = "multiple";
       }
 
       // Now let's handle when a file was selected
-      elt.addEventListener('change', handleFileSelect, false);
+      elt.addEventListener("change", handleFileSelect, false);
       return addElement(elt, this);
     } else {
       console.log(
-        'The File APIs are not fully supported in this browser. Cannot create element.'
+        "The File APIs are not fully supported in this browser. Cannot create element.",
       );
     }
   };
@@ -1069,27 +1067,27 @@
     var elt = document.createElement(type);
 
     // allow src to be empty
-    src = src || '';
-    if (typeof src === 'string') {
+    src = src || "";
+    if (typeof src === "string") {
       src = [src];
     }
     for (var i = 0; i < src.length; i++) {
-      var source = document.createElement('source');
+      var source = document.createElement("source");
       source.src = src[i];
       elt.appendChild(source);
     }
-    if (typeof callback !== 'undefined') {
-      var callbackHandler = function() {
+    if (typeof callback !== "undefined") {
+      var callbackHandler = function () {
         callback();
-        elt.removeEventListener('canplaythrough', callbackHandler);
+        elt.removeEventListener("canplaythrough", callbackHandler);
       };
-      elt.addEventListener('canplaythrough', callbackHandler);
+      elt.addEventListener("canplaythrough", callbackHandler);
     }
 
     var c = addElement(elt, pInst, true);
     c.loadedmetadata = false;
     // set width and height onload metadata
-    elt.addEventListener('loadedmetadata', function() {
+    elt.addEventListener("loadedmetadata", function () {
       c.width = elt.videoWidth;
       c.height = elt.videoHeight;
       //c.elt.playbackRate = s;
@@ -1139,9 +1137,9 @@
    * }
    * </code></div>
    */
-  p5.prototype.createVideo = function(src, callback) {
-    p5._validateParameters('createVideo', arguments);
-    return createMedia(this, 'video', src, callback);
+  p5.prototype.createVideo = function (src, callback) {
+    p5._validateParameters("createVideo", arguments);
+    return createMedia(this, "video", src, callback);
   };
 
   /** AUDIO STUFF **/
@@ -1179,9 +1177,9 @@
    * }
    * </code></div>
    */
-  p5.prototype.createAudio = function(src, callback) {
-    p5._validateParameters('createAudio', arguments);
-    return createMedia(this, 'audio', src, callback);
+  p5.prototype.createAudio = function (src, callback) {
+    p5._validateParameters("createAudio", arguments);
+    return createMedia(this, "audio", src, callback);
   };
 
   /** CAMERA STUFF **/
@@ -1191,13 +1189,13 @@
    * @final
    * @category Constants
    */
-  p5.prototype.VIDEO = 'video';
+  p5.prototype.VIDEO = "video";
   /**
    * @property {String} AUDIO
    * @final
    * @category Constants
    */
-  p5.prototype.AUDIO = 'audio';
+  p5.prototype.AUDIO = "audio";
 
   // from: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
   // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -1209,7 +1207,7 @@
   // with getUserMedia as it would overwrite existing properties.
   // Here, we will just add the getUserMedia property if it's missing.
   if (navigator.mediaDevices.getUserMedia === undefined) {
-    navigator.mediaDevices.getUserMedia = function(constraints) {
+    navigator.mediaDevices.getUserMedia = function (constraints) {
       // First get ahold of the legacy getUserMedia, if present
       var getUserMedia =
         navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -1218,12 +1216,12 @@
       // to keep a consistent interface
       if (!getUserMedia) {
         return Promise.reject(
-          new Error('getUserMedia is not implemented in this browser')
+          new Error("getUserMedia is not implemented in this browser"),
         );
       }
 
       // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         getUserMedia.call(navigator, constraints, resolve, reject);
       });
     };
@@ -1300,8 +1298,8 @@
    *   }
    * }
    */
-  p5.prototype.createCapture = function() {
-    p5._validateParameters('createCapture', arguments);
+  p5.prototype.createCapture = function () {
+    p5._validateParameters("createCapture", arguments);
     var useVideo = true;
     var useAudio = true;
     var constraints;
@@ -1311,25 +1309,25 @@
         useAudio = false;
       } else if (arguments[i] === p5.prototype.AUDIO) {
         useVideo = false;
-      } else if (typeof arguments[i] === 'object') {
+      } else if (typeof arguments[i] === "object") {
         constraints = arguments[i];
-      } else if (typeof arguments[i] === 'function') {
+      } else if (typeof arguments[i] === "function") {
         cb = arguments[i];
       }
     }
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      var elt = document.createElement('video');
+      var elt = document.createElement("video");
       // required to work in iOS 11 & up:
-      elt.setAttribute('playsinline', '');
+      elt.setAttribute("playsinline", "");
 
       if (!constraints) {
         constraints = { video: useVideo, audio: useAudio };
       }
 
       navigator.mediaDevices.getUserMedia(constraints).then(
-        function(stream) {
+        function (stream) {
           try {
-            if ('srcObject' in elt) {
+            if ("srcObject" in elt) {
               elt.srcObject = stream;
             } else {
               elt.src = window.URL.createObjectURL(stream);
@@ -1341,17 +1339,17 @@
             cb(stream);
           }
         },
-        function(e) {
+        function (e) {
           console.log(e);
-        }
+        },
       );
     } else {
-      throw 'getUserMedia not supported in this browser';
+      throw "getUserMedia not supported in this browser";
     }
     var c = addElement(elt, this, true);
     c.loadedmetadata = false;
     // set width and height onload metadata
-    elt.addEventListener('loadedmetadata', function() {
+    elt.addEventListener("loadedmetadata", function () {
       elt.play();
       if (elt.width) {
         c.width = elt.videoWidth = elt.width;
@@ -1379,10 +1377,10 @@
    * createElement('h2', 'im an h2 p5.element!');
    * </code></div>
    */
-  p5.prototype.createElement = function(tag, content) {
-    p5._validateParameters('createElement', arguments);
+  p5.prototype.createElement = function (tag, content) {
+    p5._validateParameters("createElement", arguments);
     var elt = document.createElement(tag);
-    if (typeof content !== 'undefined') {
+    if (typeof content !== "undefined") {
       elt.innerHTML = content;
     }
     return addElement(elt, this);
@@ -1405,12 +1403,12 @@
    * div.addClass('myClass');
    * </code></div>
    */
-  p5.Element.prototype.addClass = function(c) {
+  p5.Element.prototype.addClass = function (c) {
     if (this.elt.className) {
       // PEND don't add class more than once
       //var regex = new RegExp('[^a-zA-Z\d:]?'+c+'[^a-zA-Z\d:]?');
       //if (this.elt.className.search(/[^a-zA-Z\d:]?hi[^a-zA-Z\d:]?/) === -1) {
-      this.elt.className = this.elt.className + ' ' + c;
+      this.elt.className = this.elt.className + " " + c;
       //}
     } else {
       this.elt.className = c;
@@ -1443,10 +1441,10 @@
    * }
    * </code></div>
    */
-  p5.Element.prototype.removeClass = function(c) {
-    var regex = new RegExp('(?:^|\\s)' + c + '(?!\\S)');
-    this.elt.className = this.elt.className.replace(regex, '');
-    this.elt.className = this.elt.className.replace(/^\s+|\s+$/g, ''); //prettify (optional)
+  p5.Element.prototype.removeClass = function (c) {
+    var regex = new RegExp("(?:^|\\s)" + c + "(?!\\S)");
+    this.elt.className = this.elt.className.replace(regex, "");
+    this.elt.className = this.elt.className.replace(/^\s+|\s+$/g, ""); //prettify (optional)
     return this;
   };
 
@@ -1484,12 +1482,12 @@
    *                         to add to the current element
    * @chainable
    */
-  p5.Element.prototype.child = function(c) {
-    if (typeof c === 'undefined') {
+  p5.Element.prototype.child = function (c) {
+    if (typeof c === "undefined") {
       return this.elt.childNodes;
     }
-    if (typeof c === 'string') {
-      if (c[0] === '#') {
+    if (typeof c === "string") {
+      if (c[0] === "#") {
         c = c.substring(1);
       }
       c = document.getElementById(c);
@@ -1519,37 +1517,37 @@
    * }
    * </code></div>
    */
-  p5.Element.prototype.center = function(align) {
+  p5.Element.prototype.center = function (align) {
     var style = this.elt.style.display;
-    var hidden = this.elt.style.display === 'none';
-    var parentHidden = this.parent().style.display === 'none';
+    var hidden = this.elt.style.display === "none";
+    var parentHidden = this.parent().style.display === "none";
     var pos = { x: this.elt.offsetLeft, y: this.elt.offsetTop };
 
     if (hidden) this.show();
 
-    this.elt.style.display = 'block';
+    this.elt.style.display = "block";
     this.position(0, 0);
 
-    if (parentHidden) this.parent().style.display = 'block';
+    if (parentHidden) this.parent().style.display = "block";
 
     var wOffset = Math.abs(this.parent().offsetWidth - this.elt.offsetWidth);
     var hOffset = Math.abs(this.parent().offsetHeight - this.elt.offsetHeight);
     var y = pos.y;
     var x = pos.x;
 
-    if (align === 'both' || align === undefined) {
+    if (align === "both" || align === undefined) {
       this.position(wOffset / 2, hOffset / 2);
-    } else if (align === 'horizontal') {
+    } else if (align === "horizontal") {
       this.position(wOffset / 2, y);
-    } else if (align === 'vertical') {
+    } else if (align === "vertical") {
       this.position(x, hOffset / 2);
     }
 
-    this.style('display', style);
+    this.style("display", style);
 
     if (hidden) this.hide();
 
-    if (parentHidden) this.parent().style.display = 'none';
+    if (parentHidden) this.parent().style.display = "none";
 
     return this;
   };
@@ -1581,7 +1579,7 @@
    * @param  {boolean} [append] whether to append HTML to existing
    * @chainable
    */
-  p5.Element.prototype.html = function() {
+  p5.Element.prototype.html = function () {
     if (arguments.length === 0) {
       return this.elt.innerHTML;
     } else if (arguments[1]) {
@@ -1618,13 +1616,13 @@
    * @param  {Number} [y] y-position relative to upper left of window
    * @chainable
    */
-  p5.Element.prototype.position = function() {
+  p5.Element.prototype.position = function () {
     if (arguments.length === 0) {
       return { x: this.elt.offsetLeft, y: this.elt.offsetTop };
     } else {
-      this.elt.style.position = 'absolute';
-      this.elt.style.left = arguments[0] + 'px';
-      this.elt.style.top = arguments[1] + 'px';
+      this.elt.style.position = "absolute";
+      this.elt.style.left = arguments[0] + "px";
+      this.elt.style.top = arguments[1] + "px";
       this.x = arguments[0];
       this.y = arguments[1];
       return this;
@@ -1632,30 +1630,30 @@
   };
 
   /* Helper method called by p5.Element.style() */
-  p5.Element.prototype._translate = function() {
-    this.elt.style.position = 'absolute';
+  p5.Element.prototype._translate = function () {
+    this.elt.style.position = "absolute";
     // save out initial non-translate transform styling
-    var transform = '';
+    var transform = "";
     if (this.elt.style.transform) {
-      transform = this.elt.style.transform.replace(/translate3d\(.*\)/g, '');
-      transform = transform.replace(/translate[X-Z]?\(.*\)/g, '');
+      transform = this.elt.style.transform.replace(/translate3d\(.*\)/g, "");
+      transform = transform.replace(/translate[X-Z]?\(.*\)/g, "");
     }
     if (arguments.length === 2) {
       this.elt.style.transform =
-        'translate(' + arguments[0] + 'px, ' + arguments[1] + 'px)';
+        "translate(" + arguments[0] + "px, " + arguments[1] + "px)";
     } else if (arguments.length > 2) {
       this.elt.style.transform =
-        'translate3d(' +
+        "translate3d(" +
         arguments[0] +
-        'px,' +
+        "px," +
         arguments[1] +
-        'px,' +
+        "px," +
         arguments[2] +
-        'px)';
+        "px)";
       if (arguments.length === 3) {
-        this.elt.parentElement.style.perspective = '1000px';
+        this.elt.parentElement.style.perspective = "1000px";
       } else {
-        this.elt.parentElement.style.perspective = arguments[3] + 'px';
+        this.elt.parentElement.style.perspective = arguments[3] + "px";
       }
     }
     // add any extra transform styling back on end
@@ -1664,23 +1662,23 @@
   };
 
   /* Helper method called by p5.Element.style() */
-  p5.Element.prototype._rotate = function() {
+  p5.Element.prototype._rotate = function () {
     // save out initial non-rotate transform styling
-    var transform = '';
+    var transform = "";
     if (this.elt.style.transform) {
-      transform = this.elt.style.transform.replace(/rotate3d\(.*\)/g, '');
-      transform = transform.replace(/rotate[X-Z]?\(.*\)/g, '');
+      transform = this.elt.style.transform.replace(/rotate3d\(.*\)/g, "");
+      transform = transform.replace(/rotate[X-Z]?\(.*\)/g, "");
     }
 
     if (arguments.length === 1) {
-      this.elt.style.transform = 'rotate(' + arguments[0] + 'deg)';
+      this.elt.style.transform = "rotate(" + arguments[0] + "deg)";
     } else if (arguments.length === 2) {
       this.elt.style.transform =
-        'rotate(' + arguments[0] + 'deg, ' + arguments[1] + 'deg)';
+        "rotate(" + arguments[0] + "deg, " + arguments[1] + "deg)";
     } else if (arguments.length === 3) {
-      this.elt.style.transform = 'rotateX(' + arguments[0] + 'deg)';
-      this.elt.style.transform += 'rotateY(' + arguments[1] + 'deg)';
-      this.elt.style.transform += 'rotateZ(' + arguments[2] + 'deg)';
+      this.elt.style.transform = "rotateX(" + arguments[0] + "deg)";
+      this.elt.style.transform += "rotateY(" + arguments[1] + "deg)";
+      this.elt.style.transform += "rotateZ(" + arguments[2] + "deg)";
     }
     // add remaining transform back on
     this.elt.style.transform += transform;
@@ -1737,50 +1735,50 @@
    * @param  {String|Number|p5.Color} [value3]  translate can take a 2nd & 3rd value
    * @chainable
    */
-  p5.Element.prototype.style = function(prop, val) {
+  p5.Element.prototype.style = function (prop, val) {
     var self = this;
 
     if (val instanceof p5.Color) {
       val =
-        'rgba(' +
+        "rgba(" +
         val.levels[0] +
-        ',' +
+        "," +
         val.levels[1] +
-        ',' +
+        "," +
         val.levels[2] +
-        ',' +
+        "," +
         val.levels[3] / 255 +
-        ')';
+        ")";
     }
 
-    if (typeof val === 'undefined') {
-      if (prop.indexOf(':') === -1) {
+    if (typeof val === "undefined") {
+      if (prop.indexOf(":") === -1) {
         var styles = window.getComputedStyle(self.elt);
         var style = styles.getPropertyValue(prop);
         return style;
       } else {
-        var attrs = prop.split(';');
+        var attrs = prop.split(";");
         for (var i = 0; i < attrs.length; i++) {
-          var parts = attrs[i].split(':');
+          var parts = attrs[i].split(":");
           if (parts[0] && parts[1]) {
             this.elt.style[parts[0].trim()] = parts[1].trim();
           }
         }
       }
     } else {
-      if (prop === 'rotate' || prop === 'translate' || prop === 'position') {
+      if (prop === "rotate" || prop === "translate" || prop === "position") {
         var trans = Array.prototype.shift.apply(arguments);
-        var f = this[trans] || this['_' + trans];
+        var f = this[trans] || this["_" + trans];
         f.apply(this, arguments);
       } else {
         this.elt.style[prop] = val;
         if (
-          prop === 'width' ||
-          prop === 'height' ||
-          prop === 'left' ||
-          prop === 'top'
+          prop === "width" ||
+          prop === "height" ||
+          prop === "left" ||
+          prop === "top"
         ) {
-          var numVal = val.replace(/\D+/g, '');
+          var numVal = val.replace(/\D+/g, "");
           this[prop] = parseInt(numVal, 10); // pend: is this necessary?
         }
       }
@@ -1809,22 +1807,22 @@
    * @param  {String} value      value to assign to attribute
    * @chainable
    */
-  p5.Element.prototype.attribute = function(attr, value) {
+  p5.Element.prototype.attribute = function (attr, value) {
     //handling for checkboxes and radios to ensure options get
     //attributes not divs
     if (
       this.elt.firstChild != null &&
-      (this.elt.firstChild.type === 'checkbox' ||
-        this.elt.firstChild.type === 'radio')
+      (this.elt.firstChild.type === "checkbox" ||
+        this.elt.firstChild.type === "radio")
     ) {
-      if (typeof value === 'undefined') {
+      if (typeof value === "undefined") {
         return this.elt.firstChild.getAttribute(attr);
       } else {
         for (var i = 0; i < this.elt.childNodes.length; i++) {
           this.elt.childNodes[i].setAttribute(attr, value);
         }
       }
-    } else if (typeof value === 'undefined') {
+    } else if (typeof value === "undefined") {
       return this.elt.getAttribute(attr);
     } else {
       this.elt.setAttribute(attr, value);
@@ -1863,11 +1861,11 @@
    * }
    * </code></div>
    */
-  p5.Element.prototype.removeAttribute = function(attr) {
+  p5.Element.prototype.removeAttribute = function (attr) {
     if (
       this.elt.firstChild != null &&
-      (this.elt.firstChild.type === 'checkbox' ||
-        this.elt.firstChild.type === 'radio')
+      (this.elt.firstChild.type === "checkbox" ||
+        this.elt.firstChild.type === "radio")
     ) {
       for (var i = 0; i < this.elt.childNodes.length; i++) {
         this.elt.childNodes[i].removeAttribute(attr);
@@ -1912,12 +1910,12 @@
    * @param  {String|Number}     value
    * @chainable
    */
-  p5.Element.prototype.value = function() {
+  p5.Element.prototype.value = function () {
     if (arguments.length > 0) {
       this.elt.value = arguments[0];
       return this;
     } else {
-      if (this.elt.type === 'range') {
+      if (this.elt.type === "range") {
         return parseFloat(this.elt.value);
       } else return this.elt.value;
     }
@@ -1936,8 +1934,8 @@
    * div.show(); // turns display to block
    * </code></div>
    */
-  p5.Element.prototype.show = function() {
-    this.elt.style.display = 'block';
+  p5.Element.prototype.show = function () {
+    this.elt.style.display = "block";
     return this;
   };
 
@@ -1952,8 +1950,8 @@
    * div.hide();
    * </code></div>
    */
-  p5.Element.prototype.hide = function() {
-    this.elt.style.display = 'none';
+  p5.Element.prototype.hide = function () {
+    this.elt.style.display = "none";
     return this;
   };
 
@@ -1977,7 +1975,7 @@
    * @param  {Number|Constant} [h] height of the element, either AUTO, or a number
    * @chainable
    */
-  p5.Element.prototype.size = function(w, h) {
+  p5.Element.prototype.size = function (w, h) {
     if (arguments.length === 0) {
       return { width: this.elt.offsetWidth, height: this.elt.offsetHeight };
     } else {
@@ -1986,34 +1984,34 @@
       var AUTO = p5.prototype.AUTO;
       if (aW !== AUTO || aH !== AUTO) {
         if (aW === AUTO) {
-          aW = h * this.width / this.height;
+          aW = (h * this.width) / this.height;
         } else if (aH === AUTO) {
-          aH = w * this.height / this.width;
+          aH = (w * this.height) / this.width;
         }
         // set diff for cnv vs normal div
         if (this.elt instanceof HTMLCanvasElement) {
           var j = {};
-          var k = this.elt.getContext('2d');
+          var k = this.elt.getContext("2d");
           var prop;
           for (prop in k) {
             j[prop] = k[prop];
           }
-          this.elt.setAttribute('width', aW * this._pInst._pixelDensity);
-          this.elt.setAttribute('height', aH * this._pInst._pixelDensity);
+          this.elt.setAttribute("width", aW * this._pInst._pixelDensity);
+          this.elt.setAttribute("height", aH * this._pInst._pixelDensity);
           this.elt.setAttribute(
-            'style',
-            'width:' + aW + 'px; height:' + aH + 'px'
+            "style",
+            "width:" + aW + "px; height:" + aH + "px",
           );
           this._pInst.scale(
             this._pInst._pixelDensity,
-            this._pInst._pixelDensity
+            this._pInst._pixelDensity,
           );
           for (prop in j) {
-            this.elt.getContext('2d')[prop] = j[prop];
+            this.elt.getContext("2d")[prop] = j[prop];
           }
         } else {
-          this.elt.style.width = aW + 'px';
-          this.elt.style.height = aH + 'px';
+          this.elt.style.width = aW + "px";
+          this.elt.style.height = aH + "px";
           this.elt.width = aW;
           this.elt.height = aH;
           this.width = aW;
@@ -2026,8 +2024,8 @@
         if (this._pInst && this._pInst._curElement) {
           // main canvas associated with p5 instance
           if (this._pInst._curElement.elt === this.elt) {
-            this._pInst._setProperty('width', this.elt.offsetWidth);
-            this._pInst._setProperty('height', this.elt.offsetHeight);
+            this._pInst._setProperty("width", this.elt.offsetWidth);
+            this._pInst._setProperty("height", this.elt.offsetHeight);
           }
         }
       }
@@ -2044,7 +2042,7 @@
    * myDiv.remove();
    * </code></div>
    */
-  p5.Element.prototype.remove = function() {
+  p5.Element.prototype.remove = function () {
     // deregister events
     for (var ev in this._events) {
       this.elt.removeEventListener(ev, this._events[ev]);
@@ -2069,11 +2067,11 @@
    * @constructor
    * @param {String} elt DOM node that is wrapped
    */
-  p5.MediaElement = function(elt, pInst) {
+  p5.MediaElement = function (elt, pInst) {
     p5.Element.call(this, elt, pInst);
 
     var self = this;
-    this.elt.crossOrigin = 'anonymous';
+    this.elt.crossOrigin = "anonymous";
 
     this._prevTime = 0;
     this._cueIDCounter = 0;
@@ -2121,29 +2119,29 @@
      * }
      * </code></div>
      */
-    Object.defineProperty(self, 'src', {
-      get: function() {
+    Object.defineProperty(self, "src", {
+      get: function () {
         var firstChildSrc = self.elt.children[0].src;
-        var srcVal = self.elt.src === window.location.href ? '' : self.elt.src;
+        var srcVal = self.elt.src === window.location.href ? "" : self.elt.src;
         var ret =
           firstChildSrc === window.location.href ? srcVal : firstChildSrc;
         return ret;
       },
-      set: function(newValue) {
+      set: function (newValue) {
         for (var i = 0; i < self.elt.children.length; i++) {
           self.elt.removeChild(self.elt.children[i]);
         }
-        var source = document.createElement('source');
+        var source = document.createElement("source");
         source.src = newValue;
         elt.appendChild(source);
         self.elt.src = newValue;
         self.modified = true;
-      }
+      },
     });
 
     // private _onended callback, set by the method: onended(callback)
-    self._onended = function() {};
-    self.elt.onended = function() {
+    self._onended = function () {};
+    self.elt.onended = function () {
       self._onended(self);
     };
   };
@@ -2187,7 +2185,7 @@
    * }
    * </code></div>
    */
-  p5.MediaElement.prototype.play = function() {
+  p5.MediaElement.prototype.play = function () {
     if (this.elt.currentTime === this.elt.duration) {
       this.elt.currentTime = 0;
     }
@@ -2200,10 +2198,10 @@
       promise = this.elt.play();
     }
     if (promise && promise.catch) {
-      promise.catch(function(e) {
+      promise.catch(function (e) {
         console.log(
-          'WARN: Element play method raised an error asynchronously',
-          e
+          "WARN: Element play method raised an error asynchronously",
+          e,
         );
       });
     }
@@ -2268,7 +2266,7 @@
    * }
    * </code></div>
    */
-  p5.MediaElement.prototype.stop = function() {
+  p5.MediaElement.prototype.stop = function () {
     this.elt.pause();
     this.elt.currentTime = 0;
     return this;
@@ -2331,7 +2329,7 @@
    * }
    * </code></div>
    */
-  p5.MediaElement.prototype.pause = function() {
+  p5.MediaElement.prototype.pause = function () {
     this.elt.pause();
     return this;
   };
@@ -2387,8 +2385,8 @@
    * }
    * </code></div>
    */
-  p5.MediaElement.prototype.loop = function() {
-    this.elt.setAttribute('loop', true);
+  p5.MediaElement.prototype.loop = function () {
+    this.elt.setAttribute("loop", true);
     this.play();
     return this;
   };
@@ -2439,8 +2437,8 @@
    * </code></div>
    *
    */
-  p5.MediaElement.prototype.noLoop = function() {
-    this.elt.setAttribute('loop', false);
+  p5.MediaElement.prototype.noLoop = function () {
+    this.elt.setAttribute("loop", false);
     return this;
   };
 
@@ -2451,8 +2449,8 @@
    * @param {Boolean} autoplay whether the element should autoplay
    * @chainable
    */
-  p5.MediaElement.prototype.autoplay = function(val) {
-    this.elt.setAttribute('autoplay', val);
+  p5.MediaElement.prototype.autoplay = function (val) {
+    this.elt.setAttribute("autoplay", val);
     return this;
   };
 
@@ -2534,8 +2532,8 @@
    * @param {Number}            val volume between 0.0 and 1.0
    * @chainable
    */
-  p5.MediaElement.prototype.volume = function(val) {
-    if (typeof val === 'undefined') {
+  p5.MediaElement.prototype.volume = function (val) {
+    if (typeof val === "undefined") {
       return this.elt.volume;
     } else {
       this.elt.volume = val;
@@ -2618,8 +2616,8 @@
    * @param {Number} speed  speed multiplier for element playback
    * @chainable
    */
-  p5.MediaElement.prototype.speed = function(val) {
-    if (typeof val === 'undefined') {
+  p5.MediaElement.prototype.speed = function (val) {
+    if (typeof val === "undefined") {
       return this.presetPlaybackRate || this.elt.playbackRate;
     } else {
       if (this.loadedmetadata) {
@@ -2680,8 +2678,8 @@
    * @param {Number} time time to jump to (in seconds)
    * @chainable
    */
-  p5.MediaElement.prototype.time = function(val) {
-    if (typeof val === 'undefined') {
+  p5.MediaElement.prototype.time = function (val) {
+    if (typeof val === "undefined") {
       return this.elt.currentTime;
     } else {
       this.elt.currentTime = val;
@@ -2717,17 +2715,17 @@
    * }
    * </code></div>
    */
-  p5.MediaElement.prototype.duration = function() {
+  p5.MediaElement.prototype.duration = function () {
     return this.elt.duration;
   };
   p5.MediaElement.prototype.pixels = [];
-  p5.MediaElement.prototype._ensureCanvas = function() {
+  p5.MediaElement.prototype._ensureCanvas = function () {
     if (!this.canvas) this.loadPixels();
   };
-  p5.MediaElement.prototype.loadPixels = function() {
+  p5.MediaElement.prototype.loadPixels = function () {
     if (!this.canvas) {
-      this.canvas = document.createElement('canvas');
-      this.drawingContext = this.canvas.getContext('2d');
+      this.canvas = document.createElement("canvas");
+      this.drawingContext = this.canvas.getContext("2d");
     }
     if (this.loadedmetadata) {
       // wait for metadata for w/h
@@ -2751,7 +2749,7 @@
           0,
           0,
           this.canvas.width,
-          this.canvas.height
+          this.canvas.height,
         );
         p5.Renderer2D.prototype.loadPixels.call(this);
       }
@@ -2759,7 +2757,7 @@
     this.setModified(true);
     return this;
   };
-  p5.MediaElement.prototype.updatePixels = function(x, y, w, h) {
+  p5.MediaElement.prototype.updatePixels = function (x, y, w, h) {
     if (this.loadedmetadata) {
       // wait for metadata
       this._ensureCanvas();
@@ -2768,7 +2766,7 @@
     this.setModified(true);
     return this;
   };
-  p5.MediaElement.prototype.get = function(x, y, w, h) {
+  p5.MediaElement.prototype.get = function (x, y, w, h) {
     if (this.loadedmetadata) {
       // wait for metadata
       var currentTime = this.elt.currentTime;
@@ -2779,7 +2777,7 @@
       }
 
       return p5.Renderer2D.prototype.get.call(this, x, y, w, h);
-    } else if (typeof x === 'undefined') {
+    } else if (typeof x === "undefined") {
       return new p5.Image(1, 1);
     } else if (w > 1) {
       return new p5.Image(x, y, w, h);
@@ -2787,7 +2785,7 @@
       return [0, 0, 0, 255];
     }
   };
-  p5.MediaElement.prototype.set = function(x, y, imgOrCol) {
+  p5.MediaElement.prototype.set = function (x, y, imgOrCol) {
     if (this.loadedmetadata) {
       // wait for metadata
       this._ensureCanvas();
@@ -2795,11 +2793,11 @@
       this.setModified(true);
     }
   };
-  p5.MediaElement.prototype.copy = function() {
+  p5.MediaElement.prototype.copy = function () {
     this._ensureCanvas();
     p5.Renderer2D.prototype.copy.apply(this, arguments);
   };
-  p5.MediaElement.prototype.mask = function() {
+  p5.MediaElement.prototype.mask = function () {
     this.loadPixels();
     this.setModified(true);
     p5.Image.prototype.mask.apply(this, arguments);
@@ -2813,7 +2811,7 @@
    * @return {boolean} a boolean indicating whether or not the
    * image has been updated or modified since last texture upload.
    */
-  p5.MediaElement.prototype.isModified = function() {
+  p5.MediaElement.prototype.isModified = function () {
     return this._modified;
   };
   /**
@@ -2827,7 +2825,7 @@
    * modified.
    * @private
    */
-  p5.MediaElement.prototype.setModified = function(value) {
+  p5.MediaElement.prototype.setModified = function (value) {
     this._modified = value;
   };
   /**
@@ -2856,7 +2854,7 @@
    * }
    * </code></div>
    */
-  p5.MediaElement.prototype.onended = function(callback) {
+  p5.MediaElement.prototype.onended = function (callback) {
     this._onended = callback;
     return this;
   };
@@ -2875,11 +2873,11 @@
    * @param  {AudioNode|Object} audioNode AudioNode from the Web Audio API,
    * or an object from the p5.sound library
    */
-  p5.MediaElement.prototype.connect = function(obj) {
+  p5.MediaElement.prototype.connect = function (obj) {
     var audioContext, masterOutput;
 
     // if p5.sound exists, same audio context
-    if (typeof p5.prototype.getAudioContext === 'function') {
+    if (typeof p5.prototype.getAudioContext === "function") {
       audioContext = p5.prototype.getAudioContext();
       masterOutput = p5.soundOut.input;
     } else {
@@ -2887,7 +2885,7 @@
         audioContext = obj.context;
         masterOutput = audioContext.destination;
       } catch (e) {
-        throw 'connect() is meant to be used with Web Audio API or p5.sound.js';
+        throw "connect() is meant to be used with Web Audio API or p5.sound.js";
       }
     }
 
@@ -2919,11 +2917,11 @@
    *
    * @method  disconnect
    */
-  p5.MediaElement.prototype.disconnect = function() {
+  p5.MediaElement.prototype.disconnect = function () {
     if (this.audioSourceNode) {
       this.audioSourceNode.disconnect();
     } else {
-      throw 'nothing to disconnect';
+      throw "nothing to disconnect";
     }
   };
 
@@ -2954,9 +2952,9 @@
    * }
    * </code></div>
    */
-  p5.MediaElement.prototype.showControls = function() {
+  p5.MediaElement.prototype.showControls = function () {
     // must set style for the element to show on the page
-    this.elt.style['text-align'] = 'inherit';
+    this.elt.style["text-align"] = "inherit";
     this.elt.controls = true;
   };
 
@@ -2985,7 +2983,7 @@
    * }
    * </code></div>
    */
-  p5.MediaElement.prototype.hideControls = function() {
+  p5.MediaElement.prototype.hideControls = function () {
     this.elt.controls = false;
   };
 
@@ -2993,7 +2991,7 @@
 
   // Cue inspired by JavaScript setTimeout, and the
   // Tone.js Transport Timeline Event, MIT License Yotam Mann 2015 tonejs.org
-  var Cue = function(callback, time, id, val) {
+  var Cue = function (callback, time, id, val) {
     this.callback = callback;
     this.time = time;
     this.id = id;
@@ -3051,7 +3049,7 @@
    * }
    * </code></div>
    */
-  p5.MediaElement.prototype.addCue = function(time, callback, val) {
+  p5.MediaElement.prototype.addCue = function (time, callback, val) {
     var id = this._cueIDCounter++;
 
     var cue = new Cue(callback, time, id, val);
@@ -3093,7 +3091,7 @@
    * }
    * </code></div>
    */
-  p5.MediaElement.prototype.removeCue = function(id) {
+  p5.MediaElement.prototype.removeCue = function (id) {
     for (var i = 0; i < this._cues.length; i++) {
       if (this._cues[i].id === id) {
         console.log(id);
@@ -3140,14 +3138,14 @@
    * }
    * </code></div>
    */
-  p5.MediaElement.prototype.clearCues = function() {
+  p5.MediaElement.prototype.clearCues = function () {
     this._cues = [];
     this.elt.ontimeupdate = null;
   };
 
   // private method that checks for cues to be fired if events
   // have been scheduled using addCue(callback, time).
-  p5.MediaElement.prototype._onTimeUpdate = function() {
+  p5.MediaElement.prototype._onTimeUpdate = function () {
     var playbackTime = this.time();
 
     for (var i = 0; i < this._cues.length; i++) {
@@ -3175,7 +3173,7 @@
    * @constructor
    * @param {File} file File that is wrapped
    */
-  p5.File = function(file, pInst) {
+  p5.File = function (file, pInst) {
     /**
      * Underlying File object. All normal File methods can be called on this.
      *
@@ -3187,7 +3185,7 @@
 
     // Splitting out the file type into two components
     // This makes determining if image or text etc simpler
-    var typeList = file.type.split('/');
+    var typeList = file.type.split("/");
     /**
      * File type (image, text, etc.)
      *
@@ -3222,9 +3220,9 @@
   };
 });
 
-p5.File._createLoader = function(theFile, callback) {
+p5.File._createLoader = function (theFile, callback) {
   var reader = new FileReader();
-  reader.onload = function(e) {
+  reader.onload = function (e) {
     var p5file = new p5.File(theFile);
     p5file.data = e.target.result;
     callback(p5file);
@@ -3232,7 +3230,7 @@ p5.File._createLoader = function(theFile, callback) {
   return reader;
 };
 
-p5.File._load = function(f, callback) {
+p5.File._load = function (f, callback) {
   // Text or data?
   // This should likely be improved
   if (/^text\//.test(f.type)) {

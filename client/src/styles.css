@@ -8,7 +8,6 @@ body {
   text-align: center;
 }
 
-
 header .navbar {
   margin: 0px;
   border-radius: 0px;
@@ -35,7 +34,6 @@ main {
   color: lightblue;
   text-align: center;
   font: Bold 24px verdana;
-
 }
 #mist {
   padding-top: 200px;
@@ -47,33 +45,26 @@ main {
 #container {
   margin: 20px;
 
-
   background-color: cream;
-
 }
 
 .form-group {
   list-style-type: none;
-
 }
 
 #results {
   float: right;
   padding: 50px;
-
 }
 
 #profile-photo {
   background-color: #14141414;
   float: left;
-
-
 }
 
 #upload {
-
   padding: 1em;
 }
-#forgot:hover{
-text-decoration: underline;
+#forgot:hover {
+  text-decoration: underline;
 }

@@ -1,48 +1,43 @@
-let myform
-let but
+let myform;
+let but;
 
-
-let container
-let changePhotobtn
-let changephoto
+let container;
+let changePhotobtn;
+let changephoto;
 
 function setup() {
-    noCanvas()
+  noCanvas();
 
-    but = select('#but') || null
-    if (but !==null) {
-        but.mouseClicked(handle)
-    }
+  but = select("#but") || null;
+  if (but !== null) {
+    but.mouseClicked(handle);
+  }
 
-    myform = select('#myform') || null;
-    if (myform !== null) {
-        myform.hide()
-    }
-    container = select('#forms')
+  myform = select("#myform") || null;
+  if (myform !== null) {
+    myform.hide();
+  }
+  container = select("#forms");
 
-
-
-    changePhotobtn = createButton('changePhoto').addClass('btn-default')
-    container.child(changePhotobtn)
-    changePhotobtn.mousePressed(handleChange)
-    changephoto = select('#changeinfo').hide()
-
-
+  changePhotobtn = createButton("changePhoto").addClass("btn-default");
+  container.child(changePhotobtn);
+  changePhotobtn.mousePressed(handleChange);
+  changephoto = select("#changeinfo").hide();
 }
 
 function handle() {
-    myform.show()
+  myform.show();
 
-    but.html('hide upload').mouseOver(() => {
-        myform.hide()
-    })
+  but.html("hide upload").mouseOver(() => {
+    myform.hide();
+  });
 }
 
 function handleChange() {
-    if (but !== null && myform != null) {
-        but.hide()
-        myform.hide()
-    } else {
-        changephoto.show()
-    }
+  if (but !== null && myform != null) {
+    but.hide();
+    myform.hide();
+  } else {
+    changephoto.show();
+  }
 }

@@ -14,7 +14,7 @@ If you have found a bug in the p5.js library, you can file it here under the [�
 
 ## p5.js library
 
-To use the complete p5.js library, you can [download it here](http://p5js.org/download). If you are interested in the most recent, less stable version, or even simply in (**new!**) certain components of p5.js, you can clone this repository and run `grunt` from the command line to generate the library from source. See the [developer docs](https://github.com/processing/p5.js/blob/master/developer_docs/) for more information about our build process to generate the complete as well as selective library.	
+To use the complete p5.js library, you can [download it here](http://p5js.org/download). If you are interested in the most recent, less stable version, or even simply in (**new!**) certain components of p5.js, you can clone this repository and run `grunt` from the command line to generate the library from source. See the [developer docs](https://github.com/processing/p5.js/blob/master/developer_docs/) for more information about our build process to generate the complete as well as selective library.
 
 You can also start with the [codepen template](https://codepen.io/p5js/pen/wreBKy). You may need to update the version of the p5.js library that is linked into the html section.
 
@@ -24,22 +24,21 @@ Community maintained typescript definitions are [here](https://github.com/p5-typ
 
 Please post bugs in the correct repository:
 
-* p5.js general and p5.dom: [https://github.com/processing/p5.js/issues](https://github.com/processing/p5.js/issues)
-* p5.sound: [https://github.com/processing/p5.js-sound/issues](https://github.com/processing/p5.js-sound/issues)
-* p5.js website: [https://github.com/processing/p5.js-website/issues](https://github.com/processing/p5.js-website/issues)
-* p5.js web editor: [https://github.com/processing/p5.js-web-editor/issues](https://github.com/processing/p5.js-web-editor/issues)
-
+- p5.js general and p5.dom: [https://github.com/processing/p5.js/issues](https://github.com/processing/p5.js/issues)
+- p5.sound: [https://github.com/processing/p5.js-sound/issues](https://github.com/processing/p5.js-sound/issues)
+- p5.js website: [https://github.com/processing/p5.js-website/issues](https://github.com/processing/p5.js-website/issues)
+- p5.js web editor: [https://github.com/processing/p5.js-web-editor/issues](https://github.com/processing/p5.js-web-editor/issues)
 
 ## Learning
 
 Check out [p5js.org](http://p5js.org) for lots more! Here are some quick-links:
 
-* [Get Started](http://p5js.org/get-started): Create and run your first sketch!
-* [p5.js overview](https://github.com/processing/p5.js/wiki/p5.js-overview) — An overview of the main features and functionality of p5.js.
-* [Reference](http://p5js.org/reference): The functionality supported by p5.js.
-* [Learn](//p5js.org/learn): Tutorials and short, prototypical examples exploring the basics of p5.js.
-* [Forum](http://forum.processing.org/two/categories/p5-js): Ask and answers questions about how to make things with p5.js here.
-* [Libraries](http://p5js.org/libraries): Extend p5 functionality to interact with HTML, manipulate sound, and more!
+- [Get Started](http://p5js.org/get-started): Create and run your first sketch!
+- [p5.js overview](https://github.com/processing/p5.js/wiki/p5.js-overview) — An overview of the main features and functionality of p5.js.
+- [Reference](http://p5js.org/reference): The functionality supported by p5.js.
+- [Learn](//p5js.org/learn): Tutorials and short, prototypical examples exploring the basics of p5.js.
+- [Forum](http://forum.processing.org/two/categories/p5-js): Ask and answers questions about how to make things with p5.js here.
+- [Libraries](http://p5js.org/libraries): Extend p5 functionality to interact with HTML, manipulate sound, and more!
 
 ## Get Involved
 
@@ -80,7 +79,9 @@ Developers, check out the [developer docs](https://github.com/processing/p5.js/b
 | [<img src="https://avatars1.githubusercontent.com/u/13515645?v=4" width="100px;"/><br /><sub><b>Yasai</b></sub>](https://github.com/wangyasai)<br />[📝](#blog-wangyasai "Blogposts") | [<img src="https://avatars3.githubusercontent.com/u/7667514?s=460&v=4" width="100px;"/><br /><sub><b>Jay Gupta</b></sub>](https://github.com/hackertron)<br /> | [<img src="https://avatars1.githubusercontent.com/u/22434689?v=4" width="100px;"/><br /><sub><b>Nitish Bansal</b></sub>](https://github.com/bansalnitish)<br /> | [<img src="https://avatars0.githubusercontent.com/u/8083973?s=460&v=4" width="100px;"/><br /><sub><b>Caroline Hermans</b></sub>](https://caro.io/)<br />[💡](#example-carolinehermans "Examples") [📖](https://github.com/processing/p5.js/commits?author=carolinehermans "Documentation") | [<img src="https://avatars3.githubusercontent.com/u/19146133?s=460&v=4" width="100px;"/><br /><sub><b>Faith Wuyue Yu</b></sub>](https://github.com/faithwyu)<br /> | [<img src="https://avatars2.githubusercontent.com/u/1878638?s=400&v=4" width="100px;"/><br /><sub><b>Aatish Bhatia</b></sub>](https://aatishb.com)<br />[📖](https://github.com/processing/p5.js/commits?author=aatishb "Documentation") [🐛](https://github.com/processing/p5.js/issues?q=author%3Aaatishb "Bug reports") | [<img src="https://avatars3.githubusercontent.com/u/7628664?v=4" width="100px;"/><br /><sub><b>Mislav Milicevic</b></sub>](https://github.com/dekmm)<br />[💻](https://github.com/processing/p5.js/commits?author=dekmm "Code") [🐛](https://github.com/processing/p5.js/issues?q=author%3Adekmm "Bug reports") |
 | [<img src="https://avatars1.githubusercontent.com/u/25344311?v=4" width="100px;"/><br /><sub><b>Yuting Lu</b></sub>](https://github.com/yutinglu413)<br />[📖](https://github.com/processing/p5.js/commits?author=yutinglu413 "Documentation") | [<img src="https://avatars2.githubusercontent.com/u/15272015?v=4" width="100px;"/><br /><sub><b>Adil Rabbani</b></sub>](https://github.com/adilrabbani)<br />[💻](https://github.com/processing/p5.js/commits?author=adilrabbani "Code") [🐛](https://github.com/processing/p5.js/issues?q=author%3Aadilrabbani "Bug reports") [💡](#example-adilrabbani "Examples") | [<img src="https://avatars3.githubusercontent.com/u/908496?v=4" width="100px;"/><br /><sub><b>Pierre Krafft</b></sub>](http://zalastax.github.io/)<br />[🐛](https://github.com/processing/p5.js/issues?q=author%3AZalastax "Bug reports") [💻](https://github.com/processing/p5.js/commits?author=Zalastax "Code") [📖](https://github.com/processing/p5.js/commits?author=Zalastax "Documentation") [💡](#example-Zalastax "Examples") [👀](#review-Zalastax "Reviewed Pull Requests") [⚠️](https://github.com/processing/p5.js/commits?author=Zalastax "Tests") [🔧](#tool-Zalastax "Tools") | [<img src="https://avatars2.githubusercontent.com/u/12074409?v=4" width="100px;"/><br /><sub><b>Zoë Ingram</b></sub>](https://github.com/zoeingram)<br />[📖](https://github.com/processing/p5.js/commits?author=zoeingram "Documentation") | [<img src="https://avatars1.githubusercontent.com/u/6486359?s=460&v=4" width="100px;"/><br /><sub><b>Aidan Nelson</b></sub>](https://github.com/AidanNelson)<br />[🐛](https://github.com/processing/p5.js/issues?q=author%3Aaidannelson "Bug reports") [💻](https://github.com/processing/p5.js/commits?author=aidannelson "Code") [📖](https://github.com/processing/p5.js/commits?author=aidannelson "Documentation") | [<img src="https://avatars2.githubusercontent.com/u/9020979?s=460&v=4" width="100px;"/><br /><sub><b>Cameron Yick</b></sub>](https://github.com/hydrosquall)<br />[📖](https://github.com/processing/p5.js/commits?author=hydrosquall "Documentation") | [<img src="https://avatars3.githubusercontent.com/u/18724229?v=4" width="100px;"/><br /><sub><b>Tanvi Kumar</b></sub>](https://github.com/TanviKumar)<br />[🐛](https://github.com/processing/p5.js/issues?q=author%3ATanviKumar "Bug reports") [💻](https://github.com/processing/p5.js/commits?author=TanviKumar "Code") [📖](https://github.com/processing/p5.js/commits?author=TanviKumar "Documentation") [💡](#example-TanviKumar "Examples") |
 | [<img src="https://avatars0.githubusercontent.com/u/7820411?v=4" width="100px;"/><br /><sub><b>Katsuya Endoh</b></sub>](https://enkatsu.org)<br /> |
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key))!
 
 We recognize all types of contributions. This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Instructions to add yourself or add contribution emojis to your name are [here](https://github.com/processing/p5.js/issues/2309).
